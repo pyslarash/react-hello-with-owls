@@ -1,0 +1,8 @@
+.jumbotron {
+    background-color: rgba(128, 128, 128, 0.123);
+    padding: 20px 50px 50px;
+}
+
+.display-4 {
+    font-weight: 600;
+}
