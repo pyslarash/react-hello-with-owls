@@ -1,10 +1,9 @@
 import React from "react";
+import propTypes from "prop-types";
 import pic00 from "./img/00.jpg";
 import pic01 from "./img/01.jpg";
 import pic02 from "./img/02.jpg";
 import pic03 from "./img/03.jpg";
-
-const dataSet = [];
 
 const data00 = {
 	image: pic00,
@@ -43,27 +42,41 @@ const data03 = {
 	image: pic03,
 	cardTitle: "Little owl",
 	cardDescription:
-		"The little owl (Athene noctua), also known as the owl of Athena or owl of Minerva, is a bird that inhabits much of the temperate and warmer parts of Europe, the Palearctic east to Korea, and North Africa.",
+		"The little owl, also known as the owl of Athena or owl of Minerva, is a bird that inhabits much of the temperate and warmer parts of Europe, the Palearctic east to Korea, and North Africa.",
 	button: {
 		url: "https://en.wikipedia.org/wiki/Little_owl",
 		label: "Go to wikipedia",
 	},
 };
 
-dataSet.push(data00, data01, data02, data03);
+const dataSet = [data00, data01, data02, data03];
+
+const CardVar = (props) => {
+	return (
+		<div class="col-sm">
+			<div className="card" styleName="width: 18rem;">
+					<img src={props.img} className="card-img-top" />
+				<div className="card-body">
+					<h5 className="card-title">{props.title}</h5>
+					<p className="card-text">{props.desc}</p>
+					<a href={props.url} className="btn btn-primary">{props.label}</a>
+				</div>
+			</div>
+		</div>
+	)
+};
+
+CardVar.propTypes = {
+	img: propTypes.string,
+	title: propTypes.string,
+	desc: propTypes.string,
+	url: propTypes.string,
+	label: propTypes.string
+};
 
 const showData = dataSet.map((dataItem, i) => {
     return (
-    <div class="col-sm" key={i}>
-        <div className="card" styleName="width: 18rem;">
-                <img src={dataItem.image} className="card-img-top" />
-            <div className="card-body">
-                <h5 className="card-title">{dataItem.cardTitle}</h5>
-                <p className="card-text">{dataItem.cardDescription}</p>
-                <a href={dataItem.button.url} className="btn btn-primary">{dataItem.button.label}</a>
-            </div>
-        </div>
-    </div>
+		<CardVar key={i} img={dataItem.image} title={dataItem.cardTitle} desc={dataItem.cardDescription} url={dataItem.button.url} label={dataItem.button.label} />
     )
 });
 
@@ -75,6 +88,6 @@ const Card = () => {
             </div>
         </div>
     )
-}
+};
 
 export default Card;

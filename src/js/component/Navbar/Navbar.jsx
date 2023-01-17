@@ -1,39 +1,42 @@
 import React from "react";
-
-const menuItems = [];
+import propTypes from "prop-types";
 const title = "Start Bootstrap";
 
-const home = {
+const homeItem = {
     name: "Home",
-    url: "#",
-    isActive: true
+    link: "#",
+    active: true
 };
 
-const about = {
+const aboutItem = {
     name: "About",
-    url: "#",
-    isActive: false
+    link: "#",
+    active: false
 };
 
-const services = {
+const servicesItem = {
     name: "Services",
-    url: "#",
-    isActive: false
+    link: "#",
+    active: false
 };
 
-const contact = {
+const contactItem = {
     name: "Contact",
-    url: "#",
-    isActive: false
+    link: "#",
+    active: false
 };
 
-menuItems.push(home,about,services,contact);
+const menuItems = [homeItem, aboutItem, servicesItem, contactItem];
 
-const showMenu = menuItems.map((singleItem, i) => {
-    var makeItActive;
-    if (singleItem.isActive === true) {makeItActive = " active"}
-    else {makeItActive = ""};
-    return <li className="nav-item" key={i}><a className={"nav-link" + makeItActive} href={singleItem.url}>{singleItem.name}</a></li>
+const NavMenu = (props) => {
+    return (
+        <li className="nav-item">
+            <a className={`nav-link ${props.isActive ? "active" : ""}`} href={props.url}>{props.name}</a>
+        </li>
+    )};
+
+const showMenu = menuItems.map((menuItem, i) => {
+    return (<NavMenu key={i} isActive={menuItem.active} url={menuItem.link} name={menuItem.name} />)
 }
 );
 
@@ -53,6 +56,12 @@ const Navbar = () => {
             </div>
         </nav>
     );
-}
+};
+
+NavMenu.propTypes = {
+    name: propTypes.string,
+    url: propTypes.string,
+    isActive: propTypes.bool
+};
 
 export default Navbar;
